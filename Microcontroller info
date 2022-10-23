@@ -12,10 +12,27 @@ mbed microcontroller development board link
 https://os.mbed.com/platforms/mbed-LPC1768/
 
 Notes:
-From what I can gather, "mbed" refers to the entire assembled development
-board, "LPC1768" is the microprocessor that makes it run.
-The LPC1768 datasheet is very long and honestly hard to read, I'd recommend
-reading the link for it to see general information about it.
+From what I can gather, "mbed" refers to the entire assembled development board, "LPC1768" is the microprocessor that makes it run.
+The LPC1768 datasheet is very long and honestly hard to read, I'd recommend reading the link for it to see general information about it.
 Supported I/O: Ethernet, USB Host/Device, 2xSPI, 2xI2C, 3xUART, CAN, 6xPWM, 6xADC, GPIO 
-I'm unsure if we need to build the development board from scratch, so I've 
-uploaded the full circuit schematic to build one, just in case.
+I'm unsure if we need to build the development board from scratch, so I've uploaded the full circuit schematic to build one, just in case.
+
+
+ESP32 microcontroller
+--------------------
+ESP32 microcontroller link
+https://www.espressif.com/en/products/socs/esp32
+
+ESP32 development kits (scroll to the section labelled "ESP32 Series")
+https://www.espressif.com/en/products/devkits
+
+Notes:
+Has integrated WiFi and Bluetooth. Is also the fastest MC I've checked so far (240MHz dual core)
+Datasheet states it can be used for image recognition
+Looks like it can be programmed using the Arduino IDE. Code seems similar to the Arduino. Link here :https://esp32io.com/tutorials/esp32-code-structure
+Supported I/O: 34 × programmable GPIOs (I think this means the total number of pins that can be used for I/O), 12-bit SAR ADC up to 18 channels,
+, 2 × 8-bit DAC, 10 × touch sensors, 4 × SPI, 2 × I2S,2 × I2C,3 × UART,1 host (SD/eMMC/SDIO),1 slave (SDIO/SPI),
+Ethernet MAC interface with dedicated DMA and IEEE 1588 support,TWAI , compatible with ISO 11898-1 (CAN Specification 2.0),RMT (TX/RX),
+Motor PWM,LED PWM up to 16 channels,Hall sensor (IDK what a hall sensor is)
+Personally I'm hesitant to use it because we have no experience using or coding on it. However, it is cheap and seems readily available.
+If we do use it, I'd recommend checking if we can just buy the development kit instead of making it ourselves.
