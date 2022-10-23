@@ -1,0 +1,19 @@
+This file is used to store links to microcontrollers which could
+potentially be used in our project. It will be updated as I find new
+information
+======================
+
+LPC1768 microcontroller
+----------------------
+LPC1768 microcontroller link
+https://www.nxp.com/products/processors-and-microcontrollers/arm-microcontrollers/general-purpose-mcus/lpc1700-cortex-m3/512-kb-flash-64-kb-sram-ethernet-usb-lqfp100-package:LPC1768FBD100
+
+mbed microcontroller development board link
+https://os.mbed.com/platforms/mbed-LPC1768/
+
+Notes:
+From what I can gather, "mbed" refers to the entire assembled development
+board, "LPC1768" is the microprocessor that makes it run.
+The LPC1768 datasheet is very long and honestly hard to read, I'd recommend
+reading the link for it to see general information about it.
+Supported I/O: Ethernet, USB Host/Device, 2xSPI, 2xI2C, 3xUART, CAN, 6xPWM, 6xADC, GPIO 
