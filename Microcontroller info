@@ -17,3 +17,5 @@ board, "LPC1768" is the microprocessor that makes it run.
 The LPC1768 datasheet is very long and honestly hard to read, I'd recommend
 reading the link for it to see general information about it.
 Supported I/O: Ethernet, USB Host/Device, 2xSPI, 2xI2C, 3xUART, CAN, 6xPWM, 6xADC, GPIO 
+I'm unsure if we need to build the development board from scratch, so I've 
+uploaded the full circuit schematic to build one, just in case.
