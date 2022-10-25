@@ -10,6 +10,7 @@ https://www.nxp.com/products/processors-and-microcontrollers/arm-microcontroller
 
 mbed microcontroller development board link
 https://os.mbed.com/platforms/mbed-LPC1768/
+https://os.mbed.com/media/uploads/chris/mbed-005.1.pdf schematic
 
 Notes:
 From what I can gather, "mbed" refers to the entire assembled development board, "LPC1768" is the microprocessor that makes it run.
