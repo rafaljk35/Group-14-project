@@ -37,3 +37,7 @@ Ethernet MAC interface with dedicated DMA and IEEE 1588 support,TWAI , compatibl
 Motor PWM,LED PWM up to 16 channels,Hall sensor (IDK what a hall sensor is)
 Personally I'm hesitant to use it because we have no experience using or coding on it. However, it is cheap and seems readily available.
 If we do use it, I'd recommend checking if we can just buy the development kit instead of making it ourselves.
+
+esp32 KALUGA price £40
+shop             https://www.digikey.co.uk/en/products/detail/espressif-systems/ESP32-S2-KALUGA-1/12158053
+data sheet       https://media.digikey.com/pdf/Data%20Sheets/Espressif%20PDFs/ESP32-S2-Kaluga-1_Web.pdf
