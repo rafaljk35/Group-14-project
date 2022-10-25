@@ -43,3 +43,5 @@ shop             https://www.digikey.co.uk/en/products/detail/espressif-systems/
 data sheet       https://media.digikey.com/pdf/Data%20Sheets/Espressif%20PDFs/ESP32-S2-Kaluga-1_Web.pdf
 
 The  board ESP32-S2-Kaluga-1 based on ESP32-S2 has various functions, such as an LCD screen display, touch panel control, camera image acquisition, audio playback,It can be flexibly assembled and disassembled
+
+https://docs.espressif.com/projects/esp-idf/en/latest/esp32/_images/esp32-devkitC-v4-pinout.png PIN ARANGEMENT
