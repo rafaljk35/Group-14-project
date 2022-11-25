@@ -1,0 +1,15 @@
+I have looked at how to make programs for the ESP32. It is very similar to coding for the Arduino Uno, in fact, you can use the Arduino IDE to code for the ESP32.  
+
+You first need to install some additional software for the IDE to recognize the ESP32: https://esp32io.com/tutorials/esp32-software-installization 
+
+I found this website which has many tutorials for making code for the ESP32: 
+
+https://esp32io.com/esp32-tutorials 
+
+This includes a tutorial for using a servo motor, which is incredibly useful for our project: 
+
+https://esp32io.com/tutorials/esp32-servo-motor 
+
+The ESP32 can utilize a built-in library to control servos easily. All we need to do is to specify which pin of the ESP32 is connected to the PWM pin of the servo, then tell the servo what position in degrees we want it to turn to. 
+
+ 
