@@ -12,4 +12,4 @@ https://esp32io.com/tutorials/esp32-servo-motor 
 
 The ESP32 can utilize a built-in library to control servos easily. All we need to do is to specify which pin of the ESP32 is connected to the PWM pin of the servo, then tell the servo what position in degrees we want it to turn to. 
 
- 
+We borrowed an ESP32 from the shed that uses a slightly different setup found here: https://wiki.dfrobot.com/FireBeetle_Board_ESP32_E_SKU_DFR0654#target_6
