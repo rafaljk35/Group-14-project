@@ -10,6 +10,13 @@ There is a tutorial for using a servo motor, which is incredibly useful for our 
 
 https://dronebotworkshop.com/esp32-servo/ 
 
-The ESP32 can utilize a library to control servos easily. 
+The ESP32 can utilize a library to control servos easily. Installation instructions for the Arduino IDE can be found in the link above.
+This is a link to the documentation for the library
+https://github.com/madhephaestus/ESP32Servo
 
+
+
+
+OLD THINGS=====================================
+No longer used, I kept these here for record purposes only
 We borrowed an ESP32 from the shed that uses a slightly different setup found here: https://wiki.dfrobot.com/FireBeetle_Board_ESP32_E_SKU_DFR0654#target_6
