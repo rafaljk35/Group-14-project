@@ -1,0 +1,38 @@
+import serial
+import tkinter as tk
+from tkinter import ttk
+
+# Create a serial object
+ser = serial.Serial('/dev/ttyUSB0', 9600)  # Change the port and baud rate to match your device
+
+# Create a tkinter window
+root = tk.Tk()
+root.title("Serial Port Communication")
+
+# Create a Label to display the selected number
+selected_number = tk.StringVar()
+selected_number.set("Selected Number: ")
+number_label = ttk.Label(root, textvariable=selected_number)
+number_label.pack(pady=10)
+
+# Create a Combobox widget to allow the user to select a number between 1-7
+number_options = list(range(1, 8))
+number_combobox = ttk.Combobox(root, values=number_options)
+number_combobox.pack(pady=10)
+
+# Create a Button widget to send the selected number through the USB port
+def send_number():
+    number = int(number_combobox.get())
+    ser.write(str(number).encode())
+    selected_number.set("Selected Number: " + str(number))
+
+send_button = ttk.Button(root, text="Send Number", command=send_number)
+send_button.pack(pady=10)
+
+root.mainloop()
+Note: This code assumes that you have a device connected to your USB port that can receive and process the data sent through the serial port. Make sure to change the port and baud rate to match your device.
+
+
+
+
+
