@@ -33,9 +33,13 @@ void setup()
   claw.attach(servoClaw);
   joint.attach(servoJoint);
   wrist.attach(servoWrist);
+  //set servos to standby position. can be violent
+  joint.write(90);
+  elbow.write(0);
+  shoulder.write(24);
   Serial.begin(9600);
   while (!Serial);
-  Serial.println("CHoose 1-7 to choose column to move to, 0 to pickup position, 8 to open close claw");
+  Serial.println("Choose 1-7 to choose column to move to, 8 to pickup position");
 }
 
 void loop()
@@ -45,24 +49,52 @@ void loop()
     int state = Serial.parseInt();
     if (state == 1)
     {
-    
-      column7();
+      column1();
      Serial.println("Command completed arm move to column 1");
+     state = 0;
     }
     else if (state == 2)
     {
-
-     Serial.println("Command completed arm at drop position");
+      column2();
+     Serial.println("Command completed arm move to column 2");
+     state = 0;
     }  
     else if (state == 3)
     {
-
-      Serial.println("Command completed calw open/close");
+      column3();
+      Serial.println("Command completed arm move to column 3");
+      state = 0;
+    }  
+    else if (state == 4)
+    {
+      column4();
+      Serial.println("Command completed arm move to column 4");
+      state = 0;
+    }  
+    else if (state == 5)
+    {
+      column5();
+      Serial.println("Command completed arm move to column 5");
+      state = 0;
+    }  
+    else if (state == 6)
+    {
+      column6();
+      Serial.println("Command completed arm move to column 6");
+      state = 0;
+    }  
+    else if (state == 7)
+    {
+      column7();
+      Serial.println("Command completed arm move to column 7");
+      state = 0;
     }  
     else
     {
       Serial.println("ERROR: Invalid input");
+      state = 0;
     }
+//    For some reason switch case makes the code upset, which is why I used a big ugly if tree
 //    switch(state)
 //    {
 //      case 0:
@@ -105,56 +137,381 @@ void loop()
    */
 void column1()
 {
-//    for (pos = ; pos >= ; pos -= 1) //ADD ANGLES HERE
-//    { // goes from 180 degrees to 0 degrees
-//    joint.write(pos);              // tell servo to go to position in variable 'pos'
-//    delay(15);                       // waits 15 ms for the servo to reach the position
-//    }
-//    delay(500);
-//    for (pos = START_ANGLE; pos <= END_ANGLE; pos += 1) { // goes from 0 degrees to 180 degrees
-//    elbow.write(pos);              // tell servo to go to position in variable 'pos'
-//    delay(15);                       // waits 15 ms for the servo to reach the position
-//    }
-//    delay(500);
-//    for (pos = ; pos >= ; pos -= 1) //ADD ANGLES HERE
-//    { // goes from 180 degrees to 0 degrees
-//    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
-//    delay(15);                       // waits 15 ms for the servo to reach the position
-//    }
-//    delay(1500);
-//    for (pos = ; pos >= ; pos -= 1) //ADD ANGLES HERE
-//    { // goes from 180 degrees to 0 degrees
-//    claw.write(pos);              // tell servo to go to position in variable 'pos'
-//    delay(15);                       // waits 15 ms for the servo to reach the position
-//    }
-//    Serial.println("Command completed arm at column 1");
-//    Serial.println("Returning to standby...");
-//    for (pos = START_ANGLE; pos <= END_ANGLE; pos += 1) //ADD ANGLES HERE
-//    { 
-//    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
-//    delay(15);                       // waits 15 ms for the servo to reach the position
-//    }
-//    for (pos = START_ANGLE; pos >= END_ANGLE; pos -= 1) //ADD ANGLES HERE
-//    { // goes from 180 degrees to 0 degrees
-//    elbow.write(pos);              // tell servo to go to position in variable 'pos'
-//    delay(15);                       // waits 15 ms for the servo to reach the position
-//    }
-//    for (pos = START_ANGLE; pos <= END_ANGLE; pos += 1) //ADD ANGLES HERE
-//    { 
-//    joint.write(pos);              // tell servo to go to position in variable 'pos'
-//    delay(15);                       // waits 15 ms for the servo to reach the position
-//    }
-Serial.println("Column1");
-}
-void column7()
-{
+  /* the movement sequence is this;
+  standby position > column > standby position
+  servo movement sequence;
+  joint > elbow > shoulder > claw open > shoulder > elbow > joint
+  */
     int  pos = 0;
     delay(500);
+    //===claw close code, delete this bit once pickup code is complete==================
     for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
     claw.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
+    //==================================================================================
+    delay(500);
+    for (pos = 90; pos <= 102; pos += 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 0; pos <= 3; pos += 1) // goes from 0 degrees to 180 degrees
+    { 
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 24; pos <= 29; pos += 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 110; pos <= 180; pos += 1) //ADD ANGLES HERE
+    { 
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    Serial.println("Command completed arm at column 1");
+    Serial.println("Returning to standby...");
+    for (pos = 29; pos >= 24; pos -= 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 3; pos >= 0; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 102; pos >= 90; pos -= 1) //ADD ANGLES HERE
+    { 
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+}
+
+void column2()
+{
+  /* the movement sequence is this;
+  standby position > column > standby position
+  servo movement sequence;
+  joint > elbow > shoulder > claw open > shoulder > elbow > joint
+  */
+    int  pos = 0;
+    delay(500);
+    //===claw close code, delete this bit once pickup code is complete==================
+    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    //==================================================================================
+    delay(500);
+    for (pos = 90; pos <= 96; pos += 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 0; pos <= 14; pos += 1) // goes from 0 degrees to 180 degrees
+    { 
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 24; pos <= 47; pos += 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 110; pos <= 180; pos += 1) //ADD ANGLES HERE
+    { 
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    Serial.println("Command completed arm at column 1");
+    Serial.println("Returning to standby...");
+    for (pos = 47; pos >= 24; pos -= 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 14; pos >= 0; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 96; pos >= 90; pos -= 1) //ADD ANGLES HERE
+    { 
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+}
+
+void column3()
+{
+  /* the movement sequence is this;
+  standby position > column > standby position
+  servo movement sequence;
+  joint > elbow > shoulder > claw open > shoulder > elbow > joint
+  */
+    int  pos = 0;
+    delay(500);
+    //===claw close code, delete this bit once pickup code is complete==================
+    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    //==================================================================================
+    delay(500);
+    for (pos = 90; pos >= 82; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 0; pos <= 25; pos += 1) // goes from 0 degrees to 180 degrees
+    { 
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 24; pos <= 65; pos += 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 110; pos <= 180; pos += 1) //ADD ANGLES HERE
+    { 
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    Serial.println("Command completed arm at column 1");
+    Serial.println("Returning to standby...");
+    for (pos = 65; pos >= 24; pos -= 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 25; pos >= 0; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 82; pos <= 90; pos += 1) //ADD ANGLES HERE
+    { 
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+}
+
+void column4()
+{
+  /* the movement sequence is this;
+  standby position > column > standby position
+  servo movement sequence;
+  joint > elbow > shoulder > claw open > shoulder > elbow > joint
+  */
+    int  pos = 0;
+    delay(500);
+    //===claw close code, delete this bit once pickup code is complete==================
+    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    //==================================================================================
+    delay(500);
+    for (pos = 90; pos >= 70; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 0; pos <= 30; pos += 1) // goes from 0 degrees to 180 degrees
+    { 
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 24; pos <= 75; pos += 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 110; pos <= 180; pos += 1) //ADD ANGLES HERE
+    { 
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    Serial.println("Command completed arm at column 1");
+    Serial.println("Returning to standby...");
+    for (pos = 75; pos >= 24; pos -= 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 30; pos >= 0; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 70; pos <= 90; pos += 1) //ADD ANGLES HERE
+    { 
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+}
+
+void column5()
+{
+  /* the movement sequence is this;
+  standby position > column > standby position
+  servo movement sequence;
+  joint > elbow > shoulder > claw open > shoulder > elbow > joint
+  */
+    int  pos = 0;
+    delay(500);
+    //===claw close code, delete this bit once pickup code is complete==================
+    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    //==================================================================================
+    delay(500);
+    for (pos = 90; pos >= 68; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 0; pos <= 45; pos += 1) // goes from 0 degrees to 180 degrees
+    { 
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 24; pos <= 93; pos += 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 110; pos <= 180; pos += 1) //ADD ANGLES HERE
+    { 
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    Serial.println("Command completed arm at column 1");
+    Serial.println("Returning to standby...");
+    for (pos = 93; pos >= 24; pos -= 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 45; pos >= 0; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 68; pos <= 90; pos += 1) //ADD ANGLES HERE
+    { 
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+}
+
+void column6()
+{
+  /* the movement sequence is this;
+  standby position > column > standby position
+  servo movement sequence;
+  joint > elbow > shoulder > claw open > shoulder > elbow > joint
+  */
+    int  pos = 0;
+    delay(500);
+    //===claw close code, delete this bit once pickup code is complete==================
+    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    //==================================================================================
+    delay(500);
+    for (pos = 90; pos >= 76; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 0; pos <= 66; pos += 1) // goes from 0 degrees to 180 degrees
+    { 
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 24; pos <= 109; pos += 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 110; pos <= 180; pos += 1) //ADD ANGLES HERE
+    { 
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    Serial.println("Command completed arm at column 1");
+    Serial.println("Returning to standby...");
+    for (pos = 109; pos >= 24; pos -= 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 66; pos >= 0; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    delay(500);
+    for (pos = 76; pos <= 90; pos += 1) //ADD ANGLES HERE
+    { 
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+}
+
+void column7()
+{
+    int  pos = 0;
+    delay(500);
+    //===claw close code, delete this bit once pickup code is complete==================
+    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+    //==================================================================================
     delay(500);
     for (pos = 90; pos >= 78; pos -= 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
@@ -179,7 +536,7 @@ void column7()
     claw.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
-    Serial.println("Command completed arm at column 1");
+    Serial.println("Command completed arm at column 7");
     Serial.println("Returning to standby...");
     for (pos = 126; pos >= 24; pos -= 1) //ADD ANGLES HERE
     { 
