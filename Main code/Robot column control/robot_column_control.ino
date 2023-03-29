@@ -11,12 +11,12 @@ Servo wrist;
 
 //pin numbers
 //====change for esp!!!!====
-const int servoBase = 9;
-const int servoShoulder = 8;
-const int servoElbow = 7;
-const int servoClaw = 10;
-const int servoJoint = 11;
-const int servoWrist = 12;
+const int servoBase = 2;
+const int servoShoulder = 3;
+const int servoElbow = 4;
+const int servoClaw = 5;
+const int servoJoint = 6;
+const int servoWrist = 7;
 
 //variables
 
@@ -85,6 +85,7 @@ void loop()
     }  
     else if (state == 7)
     {
+      pickup_right();
       column7();
       Serial.println("Command completed arm move to column 7");
       state = 0;
@@ -135,6 +136,65 @@ void loop()
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
    */
+
+void pickup_right()
+{
+  int pos = 0;
+  for (pos = 90; pos >= 46; pos -= 1) //move base
+    { // goes from 180 degrees to 0 degrees
+    base.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 90; pos >= 45; pos -= 1) //ADD ANGLES HERE
+    { 
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 0; pos <= 54; pos += 1) //ADD ANGLES HERE
+    { 
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 24; pos <= 136; pos += 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+
+  for (pos = 136; pos >= 24; pos -= 1)
+    { // goes from 180 degrees to 0 degrees
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 54; pos >= 0; pos -= 1)
+    { // goes from 180 degrees to 0 degrees
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 45; pos <= 90; pos += 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 46; pos <= 90; pos += 1) //ADD ANGLES HERE
+    { 
+    base.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+}
 void column1()
 {
   /* the movement sequence is this;
@@ -143,14 +203,6 @@ void column1()
   joint > elbow > shoulder > claw open > shoulder > elbow > joint
   */
     int  pos = 0;
-    delay(500);
-    //===claw close code, delete this bit once pickup code is complete==================
-    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
-    { // goes from 180 degrees to 0 degrees
-    claw.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-    }
-    //==================================================================================
     delay(500);
     for (pos = 90; pos <= 102; pos += 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
@@ -205,14 +257,6 @@ void column2()
   */
     int  pos = 0;
     delay(500);
-    //===claw close code, delete this bit once pickup code is complete==================
-    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
-    { // goes from 180 degrees to 0 degrees
-    claw.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-    }
-    //==================================================================================
-    delay(500);
     for (pos = 90; pos <= 96; pos += 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
     joint.write(pos);              // tell servo to go to position in variable 'pos'
@@ -265,14 +309,6 @@ void column3()
   joint > elbow > shoulder > claw open > shoulder > elbow > joint
   */
     int  pos = 0;
-    delay(500);
-    //===claw close code, delete this bit once pickup code is complete==================
-    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
-    { // goes from 180 degrees to 0 degrees
-    claw.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-    }
-    //==================================================================================
     delay(500);
     for (pos = 90; pos >= 82; pos -= 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
@@ -327,14 +363,6 @@ void column4()
   */
     int  pos = 0;
     delay(500);
-    //===claw close code, delete this bit once pickup code is complete==================
-    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
-    { // goes from 180 degrees to 0 degrees
-    claw.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-    }
-    //==================================================================================
-    delay(500);
     for (pos = 90; pos >= 70; pos -= 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
     joint.write(pos);              // tell servo to go to position in variable 'pos'
@@ -387,14 +415,6 @@ void column5()
   joint > elbow > shoulder > claw open > shoulder > elbow > joint
   */
     int  pos = 0;
-    delay(500);
-    //===claw close code, delete this bit once pickup code is complete==================
-    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
-    { // goes from 180 degrees to 0 degrees
-    claw.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-    }
-    //==================================================================================
     delay(500);
     for (pos = 90; pos >= 68; pos -= 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
@@ -449,14 +469,6 @@ void column6()
   */
     int  pos = 0;
     delay(500);
-    //===claw close code, delete this bit once pickup code is complete==================
-    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
-    { // goes from 180 degrees to 0 degrees
-    claw.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-    }
-    //==================================================================================
-    delay(500);
     for (pos = 90; pos >= 76; pos -= 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
     joint.write(pos);              // tell servo to go to position in variable 'pos'
@@ -504,14 +516,6 @@ void column6()
 void column7()
 {
     int  pos = 0;
-    delay(500);
-    //===claw close code, delete this bit once pickup code is complete==================
-    for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
-    { // goes from 180 degrees to 0 degrees
-    claw.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-    }
-    //==================================================================================
     delay(500);
     for (pos = 90; pos >= 78; pos -= 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
