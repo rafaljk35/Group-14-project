@@ -37,9 +37,11 @@ void setup()
   joint.write(90);
   elbow.write(0);
   shoulder.write(24);
+  base.write(90);
+  claw.write(180);
   Serial.begin(9600);
   while (!Serial);
-  Serial.println("Choose 1-7 to choose column to move to, 8 to pickup position");
+  Serial.println("Choose 1-7 to choose column to move to");
 }
 
 void loop()
@@ -49,36 +51,48 @@ void loop()
     int state = Serial.parseInt();
     if (state == 1)
     {
+      pickup_right(); 
+      Serial.println("Command completed arm picked up right token");
       column1();
-     Serial.println("Command completed arm move to column 1");
-     state = 0;
+      Serial.println("Command completed arm move to column 1");
+      state = 0;
     }
     else if (state == 2)
     {
+      pickup_right();
+      Serial.println("Command completed arm picked up right token");
       column2();
-     Serial.println("Command completed arm move to column 2");
-     state = 0;
+      Serial.println("Command completed arm move to column 2");
+      state = 0;
     }  
     else if (state == 3)
     {
+      pickup_right();
+      Serial.println("Command completed arm picked up right token");
       column3();
       Serial.println("Command completed arm move to column 3");
       state = 0;
     }  
     else if (state == 4)
     {
+      pickup_right();
+      Serial.println("Command completed arm picked up right token");
       column4();
       Serial.println("Command completed arm move to column 4");
       state = 0;
     }  
     else if (state == 5)
     {
+      pickup_right();
+      Serial.println("Command completed arm picked up right token");
       column5();
       Serial.println("Command completed arm move to column 5");
       state = 0;
     }  
     else if (state == 6)
     {
+      pickup_right();
+      Serial.println("Command completed arm picked up right token");
       column6();
       Serial.println("Command completed arm move to column 6");
       state = 0;
@@ -86,13 +100,70 @@ void loop()
     else if (state == 7)
     {
       pickup_right();
+      Serial.println("Command completed arm picked up right token");
+      column7();
+      Serial.println("Command completed arm move to column 7");
+      state = 0; 
+    }  
+    else if (state == 8)
+    {
+      pickup_left();
+      Serial.println("Command completed arm picked up left token");
+      column1();
+      Serial.println("Command completed arm move to column 1");
+      state = 0;
+    }
+    else if (state == 9)
+    {
+      pickup_left();
+      Serial.println("Command completed arm picked up left token");
+      column2();
+      Serial.println("Command completed arm move to column 2");
+      state = 0;
+    }
+    else if (state == 10)
+    {
+      pickup_left();
+      Serial.println("Command completed arm picked up left token");
+      column3();
+      Serial.println("Command completed arm move to column 3");
+      state = 0;
+    }
+    else if (state == 11)
+    {
+      pickup_left();
+      Serial.println("Command completed arm picked up left token");
+      column4();
+      Serial.println("Command completed arm move to column 4");
+      state = 0;
+    }
+    else if (state == 12)
+    {
+      pickup_left();
+      Serial.println("Command completed arm picked up left token");
+      column5();
+      Serial.println("Command completed arm move to column 5");
+      state = 0;
+    }
+    else if (state == 13)
+    {
+      pickup_left();
+      Serial.println("Command completed arm picked up left token");
+      column6();
+      Serial.println("Command completed arm move to column 6");
+      state = 0;
+    }
+    else if (state == 14)
+    {
+      pickup_left();
+      Serial.println("Command completed arm picked up left token");
       column7();
       Serial.println("Command completed arm move to column 7");
       state = 0;
-    }  
+    }
     else
     {
-      Serial.println("ERROR: Invalid input");
+      Serial.println("ERROR: Input not an integer or not a valid input");
       state = 0;
     }
 //    For some reason switch case makes the code upset, which is why I used a big ugly if tree
@@ -137,7 +208,7 @@ void loop()
     }
    */
 
-void pickup_right()
+void pickup_right() //pickup from tokenholder on the right
 {
   int pos = 0;
   for (pos = 90; pos >= 46; pos -= 1) //move base
@@ -146,7 +217,7 @@ void pickup_right()
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-  for (pos = 90; pos >= 45; pos -= 1) //ADD ANGLES HERE
+  for (pos = 90; pos >= 55; pos -= 1) //ADD ANGLES HERE
     { 
     joint.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
@@ -170,7 +241,6 @@ void pickup_right()
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-
   for (pos = 136; pos >= 24; pos -= 1)
     { // goes from 180 degrees to 0 degrees
     shoulder.write(pos);              // tell servo to go to position in variable 'pos'
@@ -183,7 +253,7 @@ void pickup_right()
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-  for (pos = 45; pos <= 90; pos += 1) //ADD ANGLES HERE
+  for (pos = 55; pos <= 90; pos += 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
     joint.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
@@ -195,6 +265,66 @@ void pickup_right()
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
 }
+
+void pickup_left()
+{
+  int pos = 0;
+  for (pos = 90; pos <= 136; pos += 1) //move base
+    { // goes from 180 degrees to 0 degrees
+    base.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 90; pos >= 55; pos -= 1) //ADD ANGLES HERE
+    { 
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 0; pos <= 54; pos += 1) //ADD ANGLES HERE
+    { 
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 24; pos <= 136; pos += 1) //ADD ANGLES HERE
+    { 
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 180; pos >= 110; pos -= 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    claw.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 136; pos >= 24; pos -= 1)
+    { // goes from 180 degrees to 0 degrees
+    shoulder.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 136; pos >= 90; pos -= 1) //ADD ANGLES HERE
+    { 
+    base.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 54; pos >= 0; pos -= 1)
+    { // goes from 180 degrees to 0 degrees
+    elbow.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+  delay(500);
+  for (pos = 55; pos <= 90; pos += 1) //ADD ANGLES HERE
+    { // goes from 180 degrees to 0 degrees
+    joint.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15 ms for the servo to reach the position
+    }
+
+}
+
 void column1()
 {
   /* the movement sequence is this;
