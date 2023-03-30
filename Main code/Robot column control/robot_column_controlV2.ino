@@ -211,13 +211,13 @@ void loop()
 void pickup_right() //pickup from tokenholder on the right
 {
   int pos = 0;
-  for (pos = 90; pos >= 46; pos -= 1) //move base
+  for (pos = 90; pos >= 50; pos -= 1) //move base
     { // goes from 180 degrees to 0 degrees
     base.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-  for (pos = 90; pos >= 55; pos -= 1) //ADD ANGLES HERE
+  for (pos = 90; pos >= 45; pos -= 1) //ADD ANGLES HERE
     { 
     joint.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
@@ -247,7 +247,7 @@ void pickup_right() //pickup from tokenholder on the right
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-  for (pos = 46; pos <= 90; pos += 1) //ADD ANGLES HERE
+  for (pos = 50; pos <= 90; pos += 1) //ADD ANGLES HERE
     { 
     base.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
@@ -259,7 +259,7 @@ void pickup_right() //pickup from tokenholder on the right
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-  for (pos = 55; pos <= 90; pos += 1) //ADD ANGLES HERE
+  for (pos = 45; pos <= 90; pos += 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
     joint.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
@@ -270,13 +270,13 @@ void pickup_right() //pickup from tokenholder on the right
 void pickup_left()
 {
   int pos = 0;
-  for (pos = 90; pos <= 136; pos += 1) //move base
+  for (pos = 90; pos <= 132; pos += 1) //move base
     { // goes from 180 degrees to 0 degrees
     base.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-  for (pos = 90; pos >= 55; pos -= 1) //ADD ANGLES HERE
+  for (pos = 90; pos >= 45; pos -= 1) //ADD ANGLES HERE
     { 
     joint.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
@@ -300,7 +300,7 @@ void pickup_left()
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-  for (pos = 136; pos >= 24; pos -= 1)
+  for (pos = 132; pos >= 24; pos -= 1)
     { // goes from 180 degrees to 0 degrees
     shoulder.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
@@ -318,7 +318,7 @@ void pickup_left()
     delay(15);                       // waits 15 ms for the servo to reach the position
     }
   delay(500);
-  for (pos = 55; pos <= 90; pos += 1) //ADD ANGLES HERE
+  for (pos = 45; pos <= 90; pos += 1) //ADD ANGLES HERE
     { // goes from 180 degrees to 0 degrees
     joint.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15 ms for the servo to reach the position
